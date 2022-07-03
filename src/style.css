@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  display: flex;
+}
+
+.searchbar {
+  background-color: white;
+  background-image: url("search.svg");
+  background-position: 5px 0px;
+  background-repeat: no-repeat;
+  padding-left: 25px;
+}

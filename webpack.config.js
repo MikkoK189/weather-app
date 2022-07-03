@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -6,6 +7,12 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Weather App",
+      template: "./src/index.html",
+    }),
+  ],
   module: {
     rules: [
       {
@@ -13,5 +20,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
     ],
+  },
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
 };

@@ -24,8 +24,7 @@ function parseWeather(data) {
     icon: data.weather[0].icon,
     description: data.weather[0].description,
   };
-
-  console.log(weatherData);
+  return weatherData;
 }
 
 export { GetWeather };
