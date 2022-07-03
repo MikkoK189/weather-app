@@ -20,7 +20,7 @@ async function GetWeather(location) {
 function parseWeather(data) {
   const weatherData = {
     location: data.name,
-    temperature: data.main.temp - 273.15,
+    temperature: data.main.temp,
     icon: data.weather[0].icon,
     description: data.weather[0].description,
   };
