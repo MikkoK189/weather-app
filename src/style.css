@@ -21,6 +21,10 @@
   display: flex;
 }
 
+#weathertype {
+  text-transform: capitalize;
+}
+
 .searchbar {
   background-color: white;
   background-image: url("search.svg");

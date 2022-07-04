@@ -25,7 +25,7 @@ async function setWeatherInfo(city) {
   curTime.textContent = weatherData.date;
 }
 
-// GetWeather("London");
+setWeatherInfo("Helsinki");
 
 function convertUnits(temp) {
   // Fahrenheit:  9/5(K - 273.15) + 32
