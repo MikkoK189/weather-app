@@ -3,6 +3,20 @@
   padding: 0;
 }
 
+.currentweather {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.city {
+  font-size: large;
+}
+
+.time {
+  font-size: small;
+}
+
 .content {
   display: flex;
 }
@@ -13,4 +27,15 @@
   background-position: 5px 0px;
   background-repeat: no-repeat;
   padding-left: 25px;
+}
+
+img {
+  height: 200px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-left: 1em;
 }

@@ -5,8 +5,10 @@ const form = document.getElementById("form");
 const curWeatherImg = document.getElementById("currentweatherimg");
 const cityText = document.getElementById("city");
 const curTempText = document.getElementById("currenttemp");
+const curWeatherDesc = document.getElementById("weathertype");
+const curTime = document.getElementById("time");
 
-let celsius = false;
+let celsius = true;
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -19,6 +21,8 @@ async function setWeatherInfo(city) {
   curWeatherImg.src = `https://openweathermap.org/img/wn/${weatherData.icon}@4x.png`;
   cityText.textContent = weatherData.location;
   curTempText.textContent = convertUnits(weatherData.temperature);
+  curWeatherDesc.textContent = weatherData.description;
+  curTime.textContent = weatherData.date;
 }
 
 // GetWeather("London");
