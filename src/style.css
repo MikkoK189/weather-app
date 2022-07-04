@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "Rubik", sans-serif;
 }
 
 .currentweather {
@@ -15,6 +18,7 @@
 
 .time {
   font-size: small;
+  color: rgb(110, 110, 110);
 }
 
 .content {
@@ -25,12 +29,23 @@
   text-transform: capitalize;
 }
 
+.temp {
+  font-size: 32px;
+  font-weight: bold;
+}
+
 .searchbar {
   background-color: white;
   background-image: url("search.svg");
   background-position: 5px 0px;
   background-repeat: no-repeat;
   padding-left: 25px;
+  transition: width 0.4s ease-in-out;
+  width: 5em;
+}
+
+.searchbar:focus {
+  width: 100%;
 }
 
 img {
@@ -41,5 +56,5 @@ img {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-left: 1em;
+  margin: 1em;
 }

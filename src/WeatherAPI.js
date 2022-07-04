@@ -32,9 +32,9 @@ function parseWeather(data) {
     temperature: data.main.temp,
     icon: data.weather[0].icon,
     description: data.weather[0].description,
-    date: format(fromUnixTime(data.dt), "HH:mm, EEEE do 'of' MMMM y"),
+    time: format(fromUnixTime(data.dt), "HH:mm, EEEE"),
+    date: format(fromUnixTime(data.dt), "do 'of' MMMM y"),
   };
-  console.log(weatherData);
   return weatherData;
 }
 

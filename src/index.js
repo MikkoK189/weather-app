@@ -7,12 +7,14 @@ const cityText = document.getElementById("city");
 const curTempText = document.getElementById("currenttemp");
 const curWeatherDesc = document.getElementById("weathertype");
 const curTime = document.getElementById("time");
+const curDate = document.getElementById("date");
 
 let celsius = true;
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   setWeatherInfo(event.target[0].value);
+  event.target[0].value = "";
 });
 
 async function setWeatherInfo(city) {
@@ -22,7 +24,8 @@ async function setWeatherInfo(city) {
   cityText.textContent = weatherData.location;
   curTempText.textContent = convertUnits(weatherData.temperature);
   curWeatherDesc.textContent = weatherData.description;
-  curTime.textContent = weatherData.date;
+  curTime.textContent = weatherData.time;
+  curDate.textContent = weatherData.date;
 }
 
 setWeatherInfo("Helsinki");
