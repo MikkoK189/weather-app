@@ -1,21 +1,33 @@
 import fromUnixTime from "date-fns/fromUnixTime";
 import format from "date-fns/format";
-import { compareAsc, isEqual, isToday, parseISO } from "date-fns";
+import { addDays, compareAsc, isEqual, isToday, parseISO } from "date-fns";
 
 const key = "2064d0a9d778095e3bf01bf1214f9eb3";
-function WeatherData(location, temperature, icon, description, time, date) {
-  this.location = "Failed to find";
-  this.temperature = "°C";
-  this.icon = "01d";
-  this.description = "Please try again";
-  this.time = format(new Date(0, 0, 1), "HH:mm, EEEE");
-  this.date = format(new Date(0, 0, 1), "HH:mm, EEEE do 'of' MMMM y");
+const weathersByDays = [];
+
+class WeatherData {
+  constructor(
+    location = "Failed to find",
+    temperature = "°C",
+    icon = "01d",
+    description = "Please try again",
+    time = format(new Date(0, 0, 1), "HH:mm, EEEE"),
+    date = format(new Date(0, 0, 1), "do 'of' MMMM y")
+  ) {
+    this.location = location;
+    this.temperature = temperature;
+    this.icon = icon;
+    this.description = description;
+    this.time = time;
+    this.date = date;
+  }
 }
 
-const DayWeather = {
-  mintemp: "0",
-  maxtemp: "30",
-};
+function DayWeather(day, mintemp, maxtemp) {
+  this.day = "Monday";
+  this.mintemp = "0";
+  this.maxtemp = "30";
+}
 
 // Tries to call the weather from openweathermap API
 async function GetWeather(location) {
@@ -44,9 +56,32 @@ async function getForecast(location) {
     (item) => !isToday(parseISO(item.dt_txt))
   );
 
-  console.log(weatherExceptToday);
+  // Want to go through the array and separate weathers for each day into their own arrays from which to find min and max temp for each day.
+  for (let i = 0; i < 5; i++) {
+    // console.log(addDays(new Date(), i + 1));
+    let weatherDay = weatherExceptToday.filter(function (item) {
+      // console.log(parseISO(item.dt_txt));
+      let dayToCompare = addDays(new Date(), i + 1);
+      dayToCompare.setHours(0, 0, 0, 0);
 
-  console.log(weatherInfo);
+      let testDay = parseISO(item.dt_txt);
+      testDay.setHours(0, 0, 0, 0);
+
+      if (compareAsc(dayToCompare, testDay) == 0) {
+        return true;
+      }
+      return false;
+    });
+    weathersByDays.push(weatherDay);
+    console.log(weathersByDays);
+  }
+  // Gets max temp from the day's temperatures!!
+  const maxTemp = weathersByDays[0].reduce((previous, current) => {
+    if (current.main.temp > previous) return current.main.temp;
+    return previous;
+  }, 0);
+  console.log(maxTemp);
+  console.log(Math.max(weathersByDays[0][0].main.temp));
 }
 
 function compareDates(dateToCompare, dateComparedTo) {
