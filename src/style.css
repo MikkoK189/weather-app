@@ -6,6 +6,11 @@
   font-family: "Rubik", sans-serif;
 }
 
+body {
+  background-color: #0369a1;
+  height: 100vh;
+}
+
 .currentweather {
   display: flex;
   flex-direction: column;
@@ -18,11 +23,15 @@
 
 .time {
   font-size: small;
-  color: rgb(110, 110, 110);
+  text-shadow: 1px 1px rgb(66, 66, 66);
+  color: rgb(66, 66, 66);
 }
 
 .content {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 #weathertype {
@@ -45,16 +54,21 @@
 }
 
 .searchbar:focus {
-  width: 100%;
+  width: 90%;
 }
 
 img {
   height: 200px;
 }
 
-.left {
+.center {
   display: flex;
   flex-direction: column;
   gap: 1em;
   margin: 1em;
+  background-color: #0ea5e9;
+  border: 2px #0284c7 solid;
+  box-shadow: 1px 1px 2px 2px #0285c769;
+  border-radius: 1em;
+  padding: 1em;
 }
