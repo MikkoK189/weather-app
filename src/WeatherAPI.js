@@ -34,33 +34,34 @@ async function getCoordinates(location) {
     `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}`
   );
   const coordInfo = await response.json();
-
+  console.log(coordInfo);
   return coordInfo;
 }
 
 // Tries to call the weather from openweathermap API
 async function GetWeather(location) {
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}`
+    const coordInfo = await getCoordinates(location);
+    const weatherInfo = await getForecast(
+      coordInfo.coord.lat,
+      coordInfo.coord.lon
     );
-    const weatherInfo = await response.json();
-    // getForecast(location);
-    getForecast();
-    return parseWeather(weatherInfo);
+
+    console.log(weatherInfo.current);
+    return parseWeather(weatherInfo.current, coordInfo.name);
   } catch (err) {
     console.error(err);
     return new WeatherData();
   }
 }
 
-async function getForecast() {
+async function getForecast(lat, lon) {
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lon=23.0167&lat=62.0167&appid=2064d0a9d778095e3bf01bf1214f9eb3&exclude=minutely,alerts,hourly`
+    `https://api.openweathermap.org/data/2.5/onecall?lon=${lon}&lat=${lat}&appid=2064d0a9d778095e3bf01bf1214f9eb3&exclude=minutely,alerts,hourly`
   );
   const weatherInfo = await response.json();
-
   console.log(weatherInfo);
+  return weatherInfo;
 }
 
 // async function getForecast(location) {
@@ -106,10 +107,10 @@ function compareDates(dateToCompare, dateComparedTo) {
   return isEqual(dateToCompare, dateComparedTo);
 }
 
-function parseWeather(data) {
+function parseWeather(data, cityName) {
   const weatherData = new WeatherData();
-  weatherData.location = data.name;
-  weatherData.temperature = data.main.temp;
+  weatherData.location = cityName;
+  weatherData.temperature = data.temp;
   weatherData.icon = data.weather[0].icon;
   weatherData.description = data.weather[0].description;
   weatherData.time = format(fromUnixTime(data.dt), "HH:mm, EEEE");
