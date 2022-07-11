@@ -5,6 +5,7 @@ const template = document.getElementById(0);
 const container = document.getElementById("cardcont");
 
 function displayForecast(data) {
+  clearCards();
   const dataWithoutToday = data.daily.slice(1);
   dataWithoutToday.forEach((weatherDay) => {
     const newCard = template.cloneNode(true);
@@ -19,6 +20,12 @@ function displayForecast(data) {
 
     container.appendChild(newCard);
   });
+}
+
+function clearCards() {
+  while (container.firstChild) {
+    container.removeChild(container.lastChild);
+  }
 }
 
 template.parentNode.removeChild(template);
