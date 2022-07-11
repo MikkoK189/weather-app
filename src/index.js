@@ -1,5 +1,6 @@
 import "./style.css";
-import { GetWeather } from "./WeatherAPI";
+import { GetWeather, parseWeather } from "./WeatherAPI";
+import { displayForecast } from "./forecastDOM";
 
 const form = document.getElementById("form");
 const curWeatherImg = document.getElementById("currentweatherimg");
@@ -18,8 +19,12 @@ form.addEventListener("submit", (event) => {
 });
 
 async function setWeatherInfo(city) {
-  const weatherData = await GetWeather(city);
-
+  const weatherResponse = await GetWeather(city);
+  const weatherData = parseWeather(
+    weatherResponse[0].current,
+    weatherResponse[1].name
+  );
+  displayForecast(weatherResponse[0]);
   curWeatherImg.src = `https://openweathermap.org/img/wn/${weatherData.icon}@4x.png`;
   cityText.textContent = weatherData.location;
   curTempText.textContent = convertUnits(weatherData.temperature);
@@ -46,3 +51,5 @@ function convertUnits(temp) {
 
   return convertedTemp;
 }
+
+export { convertUnits };
