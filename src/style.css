@@ -1,14 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
 * {
+  font-family: "Rubik", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "Rubik", sans-serif;
 }
 
 body {
   background-color: #0369a1;
-  height: 100vh;
 }
 
 .currentweather {
@@ -21,17 +20,23 @@ body {
   font-size: large;
 }
 
+.weathercard .time {
+  font-weight: bold;
+}
+
 .time {
   font-size: small;
-  text-shadow: 1px 1px rgb(66, 66, 66);
-  color: rgb(66, 66, 66);
+  color: rgb(24, 24, 24);
 }
 
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  gap: 5em;
+  margin: 2em;
+  padding: 2em;
 }
 
 #weathertype {
@@ -71,4 +76,29 @@ img {
   box-shadow: 1px 1px 2px 2px #0285c769;
   border-radius: 1em;
   padding: 1em;
+}
+
+.bottom {
+  width: 80vw;
+  align-self: center;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 140px);
+  gap: 0.5em;
+}
+
+.weathercard {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: #0ea5e9;
+  border: 2px #0284c7 solid;
+  box-shadow: 1px 1px 2px 2px #0285c769;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+#smallimg {
+  height: 100px;
+  width: 100px;
 }
